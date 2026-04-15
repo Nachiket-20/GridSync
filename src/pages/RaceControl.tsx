@@ -68,46 +68,28 @@ function Leaderboard() {
 }
 
 // ─── Track Map Component (Enhanced) ───
+import { getRandomCircuit, type CircuitData } from '../data/circuits';
+
 function TrackMap() {
   const { state } = useRace();
   const pathRef = useRef<SVGPathElement>(null);
   const [pathLength, setPathLength] = useState(0);
-
-  // Suzuka track path (stylized)
-  const trackPath = "M 120,200 C 120,180 140,140 180,120 C 220,100 260,80 300,70 C 340,60 380,55 420,60 C 460,65 490,80 510,100 C 530,120 540,150 530,180 C 520,210 490,230 470,250 C 450,270 440,290 450,320 C 460,350 490,370 520,380 C 550,390 580,395 600,400 C 620,405 640,415 650,435 C 660,455 650,475 630,490 C 610,505 580,510 550,505 C 520,500 490,490 460,475 C 430,460 400,450 370,450 C 340,450 310,455 280,465 C 250,475 220,480 190,475 C 160,470 140,450 130,425 C 120,400 115,370 115,340 C 115,310 117,270 118,250 C 119,230 120,210 120,200 Z";
+  
+  // Pick random circuit on initial load
+  const [circuit] = useState<CircuitData>(() => getRandomCircuit());
 
   useEffect(() => {
     if (pathRef.current) {
       setPathLength(pathRef.current.getTotalLength());
     }
-  }, []);
-
-  // DRS zones
-  const drsZone1 = "M 180,120 C 220,100 260,80 300,70 C 340,60 380,55 420,60";
-  const drsZone2 = "M 190,475 C 160,470 140,450 130,425 C 120,400 115,370 115,340";
-
-  // Corner markers
-  const corners = [
-    { x: 160, y: 130, label: '1', name: 'Turn 1' },
-    { x: 300, y: 58, label: '2', name: 'S-Curves' },
-    { x: 420, y: 52, label: '3', name: '' },
-    { x: 520, y: 100, label: '5', name: 'Dunlop' },
-    { x: 540, y: 175, label: '7', name: '' },
-    { x: 470, y: 260, label: '8', name: 'Degner' },
-    { x: 445, y: 325, label: '10', name: '' },
-    { x: 520, y: 385, label: '11', name: '130R' },
-    { x: 650, y: 445, label: '13', name: 'Spoon' },
-    { x: 615, y: 500, label: '15', name: '' },
-    { x: 370, y: 460, label: '16', name: 'Hairpin' },
-    { x: 195, y: 482, label: '17', name: '' },
-  ];
+  }, [circuit]);
 
   return (
     <div className="panel track-map" id="track-map-panel">
       <div className="panel__header track-map__header">
         <div>
           <span className="panel__title">Track Map</span>
-          <span className="track-map__circuit-name"> Suzuka Circuit</span>
+          <span className="track-map__circuit-name"> {circuit.name}</span>
         </div>
         <div className="track-map__header-right">
           <div className="track-map__speed-badge">
@@ -134,20 +116,6 @@ function TrackMap() {
               <stop offset="100%" stopColor="#E10600">
                 <animate attributeName="stopColor" values="#E10600;#C70039;#E10600" dur="4s" repeatCount="indefinite" />
               </stop>
-            </linearGradient>
-
-            {/* Sector gradients */}
-            <linearGradient id="sector1-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#E10600" />
-              <stop offset="100%" stopColor="#FF6B35" />
-            </linearGradient>
-            <linearGradient id="sector2-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF6B35" />
-              <stop offset="100%" stopColor="#FFD700" />
-            </linearGradient>
-            <linearGradient id="sector3-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FFD700" />
-              <stop offset="100%" stopColor="#E10600" />
             </linearGradient>
 
             {/* DRS zone gradient */}
@@ -192,18 +160,18 @@ function TrackMap() {
           <circle cx="380" cy="280" r="180" fill="none" stroke="rgba(225,6,0,0.02)" strokeWidth="1" strokeDasharray="4 8" />
 
           {/* Track surface (wide shadow) */}
-          <path d={trackPath} fill="none" stroke="rgba(225, 6, 0, 0.08)" strokeWidth="42" strokeLinecap="round" strokeLinejoin="round" />
+          <path d={circuit.trackPath} fill="none" stroke="rgba(225, 6, 0, 0.08)" strokeWidth="42" strokeLinecap="round" strokeLinejoin="round" />
 
           {/* Track kerb effect (outer) */}
-          <path d={trackPath} fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" />
+          <path d={circuit.trackPath} fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" />
 
           {/* Track inner asphalt */}
-          <path d={trackPath} fill="none" stroke="rgba(225, 6, 0, 0.12)" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" />
+          <path d={circuit.trackPath} fill="none" stroke="rgba(225, 6, 0, 0.12)" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" />
 
           {/* Main track line with animated gradient */}
           <path
             ref={pathRef}
-            d={trackPath}
+            d={circuit.trackPath}
             fill="none"
             stroke="url(#track-gradient)"
             strokeWidth="3.5"
@@ -214,7 +182,7 @@ function TrackMap() {
 
           {/* Track center dashes (racing line) */}
           <path
-            d={trackPath}
+            d={circuit.trackPath}
             fill="none"
             stroke="rgba(255,255,255,0.06)"
             strokeWidth="1"
@@ -223,42 +191,29 @@ function TrackMap() {
           />
 
           {/* DRS Zones */}
-          <path d={drsZone1} fill="none" stroke="url(#drs-gradient)" strokeWidth="6" strokeLinecap="round" />
-          <path d={drsZone2} fill="none" stroke="url(#drs-gradient)" strokeWidth="6" strokeLinecap="round" />
-
-          {/* DRS Labels */}
-          <g>
-            <rect x="280" y="42" width="40" height="14" rx="3" fill="rgba(0,230,118,0.2)" stroke="rgba(0,230,118,0.4)" strokeWidth="0.5" />
-            <text x="300" y="53" fill="#00E676" fontSize="8" fontFamily="Orbitron" fontWeight="700" textAnchor="middle">DRS</text>
-          </g>
-          <g>
-            <rect x="100" y="370" width="40" height="14" rx="3" fill="rgba(0,230,118,0.2)" stroke="rgba(0,230,118,0.4)" strokeWidth="0.5" />
-            <text x="120" y="381" fill="#00E676" fontSize="8" fontFamily="Orbitron" fontWeight="700" textAnchor="middle">DRS</text>
-          </g>
+          {circuit.drsZones.map((drsRoute, idx) => (
+             <path key={`drs-${idx}`} d={drsRoute} fill="none" stroke="url(#drs-gradient)" strokeWidth="6" strokeLinecap="round" />
+          ))}
 
           {/* Start/Finish line */}
-          <line x1="113" y1="260" x2="127" y2="260" stroke="white" strokeWidth="3" />
-          <line x1="113" y1="260" x2="113" y2="252" stroke="white" strokeWidth="1" />
-          <line x1="127" y1="260" x2="127" y2="252" stroke="white" strokeWidth="1" />
-          <rect x="107" y="244" width="26" height="10" rx="2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
-          <text x="120" y="252" fill="white" fontSize="6" textAnchor="middle" fontFamily="Orbitron" fontWeight="600">S/F</text>
+          <line x1={circuit.startFinish.x1} y1={circuit.startFinish.y1} x2={circuit.startFinish.x2} y2={circuit.startFinish.y2} stroke="white" strokeWidth="3" />
+          <rect x={circuit.startFinishText.x - 13} y={circuit.startFinishText.y - 8} width="26" height="10" rx="2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
+          <text x={circuit.startFinishText.x} y={circuit.startFinishText.y} fill="white" fontSize="6" textAnchor="middle" fontFamily="Orbitron" fontWeight="600">S/F</text>
 
           {/* Sector markers */}
-          <g>
-            <text x="230" y="88" fill="#FF6B35" fontSize="9" fontFamily="Orbitron" fontWeight="600">SECTOR 1</text>
-            <line x1="230" y1="92" x2="290" y2="92" stroke="#FF6B35" strokeWidth="1" opacity="0.5" />
-          </g>
-          <g>
-            <text x="538" y="145" fill="#FFD700" fontSize="9" fontFamily="Orbitron" fontWeight="600">SECTOR 2</text>
-            <line x1="538" y1="149" x2="598" y2="149" stroke="#FFD700" strokeWidth="1" opacity="0.5" />
-          </g>
-          <g>
-            <text x="560" y="510" fill="#E10600" fontSize="9" fontFamily="Orbitron" fontWeight="600">SECTOR 3</text>
-            <line x1="560" y1="514" x2="620" y2="514" stroke="#E10600" strokeWidth="1" opacity="0.5" />
-          </g>
+          {circuit.sectors.map((sector) => {
+            const colors = ["#FF6B35", "#FFD700", "#E10600"];
+            const color = colors[(sector.number - 1) % 3];
+            return (
+              <g key={`sector-${sector.number}`}>
+                <text x={sector.textX} y={sector.textY} fill={color} fontSize="9" fontFamily="Orbitron" fontWeight="600">SECTOR {sector.number}</text>
+                <line x1={sector.lineX1} y1={sector.lineY1} x2={sector.lineX2} y2={sector.lineY2} stroke={color} strokeWidth="1" opacity="0.5" />
+              </g>
+            )
+          })}
 
           {/* Corner markers */}
-          {corners.map(c => (
+          {circuit.corners.map(c => (
             <g key={c.label}>
               <circle cx={c.x} cy={c.y} r="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
               <text x={c.x} y={c.y + 3} fill="rgba(255,255,255,0.5)" fontSize="7" fontFamily="Orbitron" fontWeight="600" textAnchor="middle">

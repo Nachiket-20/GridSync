@@ -44,11 +44,11 @@ export default function Navbar() {
 
         {!isRaceControl && !isSimulator && (
           <ul className="navbar__nav">
-            <li><NavLink to="/" end className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>The Paddock</NavLink></li>
-            <li><NavLink to="/race-control" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Race Control</NavLink></li>
-            <li><NavLink to="/simulator" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Simulator</NavLink></li>
-            <li><NavLink to="/archive" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Archive</NavLink></li>
-            <li><NavLink to="/profile" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Profile</NavLink></li>
+            <li><NavLink to="/" className={`navbar__link ${location.pathname === '/' ? 'navbar__link--active' : ''}`}>The Paddock</NavLink></li>
+            <li><NavLink to="/race-control" className={`navbar__link ${location.pathname === '/race-control' ? 'navbar__link--active' : ''}`}>Race Control</NavLink></li>
+            <li><NavLink to="/simulator" className={`navbar__link ${location.pathname === '/simulator' ? 'navbar__link--active' : ''}`}>Simulator</NavLink></li>
+            <li><NavLink to="/archive" className={`navbar__link ${location.pathname === '/archive' ? 'navbar__link--active' : ''}`}>Archive</NavLink></li>
+            <li><NavLink to="/profile" className={`navbar__link ${location.pathname === '/profile' ? 'navbar__link--active' : ''}`}>Profile</NavLink></li>
           </ul>
         )}
       </div>
