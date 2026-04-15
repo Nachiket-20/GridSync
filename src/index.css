@@ -1,0 +1,363 @@
+/* ============================================
+   GridSync — Design System
+   F1 Telemetry Dashboard Theme
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+  /* Backgrounds */
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #121218;
+  --bg-panel: #1A1A2E;
+  --bg-card: #16213E;
+  --bg-card-hover: #1E2A4A;
+  --bg-surface: rgba(26, 26, 46, 0.85);
+  --bg-overlay: rgba(10, 10, 15, 0.9);
+
+  /* F1 Brand */
+  --f1-red: #E10600;
+  --f1-red-glow: rgba(225, 6, 0, 0.4);
+
+  /* Team Colors */
+  --team-redbull: #3671C6;
+  --team-ferrari: #E8002D;
+  --team-mercedes: #27F4D2;
+  --team-mclaren: #FF8000;
+  --team-astonmartin: #229971;
+  --team-alpine: #0093CC;
+  --team-williams: #64C4FF;
+  --team-haas: #B6BABD;
+  --team-alphatauri: #6692FF;
+  --team-sauber: #52E252;
+
+  /* Accents */
+  --accent-cyan: #00D2BE;
+  --accent-cyan-glow: rgba(0, 210, 190, 0.3);
+  --accent-blue: #3671C6;
+  --accent-green: #00FF87;
+  --accent-yellow: #FFD700;
+  --accent-purple: #9B59B6;
+
+  /* Tyre Compounds */
+  --tyre-soft: #FF3333;
+  --tyre-medium: #FFD700;
+  --tyre-hard: #CCCCCC;
+  --tyre-inter: #39B54A;
+  --tyre-wet: #2196F3;
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #8892B0;
+  --text-tertiary: #5A6178;
+  --text-accent: #00D2BE;
+
+  /* Borders */
+  --border-primary: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(0, 210, 190, 0.3);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Typography */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-data: 'Orbitron', monospace;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 210, 190, 0.2), 0 0 40px rgba(0, 210, 190, 0.1);
+  --shadow-glow-red: 0 0 20px rgba(225, 6, 0, 0.3), 0 0 40px rgba(225, 6, 0, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-Index */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 500;
+  --z-fab: 600;
+  --z-toast: 700;
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ── Typography Utilities ── */
+.font-data {
+  font-family: var(--font-data);
+}
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--accent-cyan); }
+.text-red { color: var(--f1-red); }
+.text-green { color: var(--accent-green); }
+.text-yellow { color: var(--accent-yellow); }
+
+/* ── Panel / Card System ── */
+.panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.panel--glow {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-card), var(--shadow-glow-cyan);
+}
+
+.panel--red {
+  border-color: rgba(225, 6, 0, 0.3);
+  box-shadow: var(--shadow-card), var(--shadow-glow-red);
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.panel__title {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+}
+
+.panel__subtitle {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* ── Button System ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn:hover {
+  border-color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn--primary {
+  background: var(--f1-red);
+  border-color: var(--f1-red);
+  color: white;
+}
+
+.btn--primary:hover {
+  background: #C80500;
+  box-shadow: var(--shadow-glow-red);
+}
+
+.btn--accent {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.btn--accent:hover {
+  background: rgba(0, 210, 190, 0.1);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+/* ── Badge System ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge--live {
+  background: var(--f1-red);
+  color: white;
+  animation: pulse-badge 2s infinite;
+}
+
+.badge--tyre-soft {
+  background: var(--tyre-soft);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 0.6rem;
+}
+
+.badge--tyre-medium {
+  background: var(--tyre-medium);
+  color: #000;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 0.6rem;
+}
+
+.badge--tyre-hard {
+  background: var(--tyre-hard);
+  color: #000;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 0.6rem;
+}
+
+/* ── Animations ── */
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 210, 190, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(0, 210, 190, 0.6), 0 0 40px rgba(0, 210, 190, 0.3); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes neon-flicker {
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 210, 190, 0.8), 0 0 20px rgba(0, 210, 190, 0.4); }
+  50% { text-shadow: 0 0 5px rgba(0, 210, 190, 0.6), 0 0 10px rgba(0, 210, 190, 0.2); }
+}
+
+@keyframes dot-move {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+/* ── Utility Classes ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Grid Backgrounds ── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-radial {
+  background: radial-gradient(ellipse at center top, rgba(225, 6, 0, 0.08) 0%, transparent 60%);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(0, 210, 190, 0.3);
+  color: var(--text-primary);
+}

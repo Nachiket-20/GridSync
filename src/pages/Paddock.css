@@ -1,0 +1,329 @@
+/* ── Paddock Page ── */
+.paddock {
+  min-height: calc(100vh - 52px);
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.paddock__bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.paddock__bg-glow {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(225, 6, 0, 0.08) 0%, transparent 70%);
+}
+
+.paddock__bg-lines {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 300px;
+  height: 80px;
+  opacity: 0.15;
+  background: repeating-linear-gradient(90deg, var(--f1-red) 0px, var(--f1-red) 1px, transparent 1px, transparent 8px);
+}
+
+.paddock__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+/* Hero */
+.paddock__hero {
+  text-align: center;
+  padding: var(--space-3xl) 0 var(--space-2xl);
+}
+
+.paddock__title {
+  font-family: var(--font-ui);
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.paddock__subtitle {
+  font-family: var(--font-data);
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.paddock__event-name {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Countdown */
+.paddock__countdown-section {
+  text-align: center;
+  padding: var(--space-2xl) 0;
+}
+
+.paddock__next-race {
+  font-family: var(--font-data);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-xl);
+}
+
+.paddock__countdown {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.paddock__countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.paddock__countdown-value {
+  font-family: var(--font-data);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 30px rgba(0, 210, 190, 0.5), 0 0 60px rgba(0, 210, 190, 0.2);
+  line-height: 1;
+  min-width: 120px;
+}
+
+.paddock__countdown-sep {
+  font-family: var(--font-data);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(0, 210, 190, 0.4);
+  line-height: 1;
+  align-self: flex-start;
+}
+
+.paddock__countdown-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.paddock__track-info {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.paddock__track-info span {
+  margin: 0 var(--space-sm);
+}
+
+/* Three Column Grid */
+.paddock__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-2xl) 0;
+}
+
+/* Weather Widget */
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-widget__temp {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.weather-widget__temp-icon {
+  font-size: 1.5rem;
+}
+
+.weather-widget__temp-value {
+  font-family: var(--font-data);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.weather-widget__temp-unit {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.weather-widget__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.weather-widget__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weather-widget__detail-label {
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weather-widget__detail-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.weather-widget__condition {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-primary);
+}
+
+.weather-widget__condition-label {
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weather-widget__condition-value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.weather-widget__chart {
+  height: 40px;
+  margin-top: var(--space-md);
+  background: linear-gradient(90deg, rgba(0, 210, 190, 0.1) 0%, rgba(0, 210, 190, 0.3) 40%, rgba(225, 6, 0, 0.2) 100%);
+  border-radius: var(--radius-sm);
+}
+
+/* Track Preview */
+.track-preview {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+.track-preview__image {
+  flex: 1;
+  min-height: 250px;
+  background: linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-card) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.track-preview__svg {
+  width: 80%;
+  height: 80%;
+}
+
+.track-preview__label {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: var(--space-lg);
+  font-family: var(--font-data);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Starting Grid */
+.starting-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.starting-grid__positions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.starting-grid__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid;
+  transition: all var(--transition-fast);
+}
+
+.starting-grid__card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.starting-grid__card-pos {
+  font-family: var(--font-data);
+  font-weight: 900;
+  font-size: 1.3rem;
+  min-width: 36px;
+}
+
+.starting-grid__card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.starting-grid__card-pos-small {
+  font-family: var(--font-data);
+  font-size: 0.55rem;
+  color: var(--text-tertiary);
+}
+
+.starting-grid__card-name {
+  font-weight: 700;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.starting-grid__card-flag {
+  font-size: 0.75rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Action Buttons */
+.paddock__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-2xl) 0;
+}

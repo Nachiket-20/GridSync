@@ -1,0 +1,828 @@
+/* ── Archive Page ── */
+.archive {
+  min-height: calc(100vh - 52px);
+  padding: var(--space-2xl);
+}
+
+.archive__content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.archive__header {
+  margin-bottom: var(--space-2xl);
+}
+
+.archive__title {
+  font-family: var(--font-data);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-xs);
+}
+
+.archive__subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.archive__filters {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.archive__search {
+  flex: 1;
+  min-width: 200px;
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.archive__search:focus {
+  border-color: var(--accent-cyan);
+}
+
+.archive__search::placeholder {
+  color: var(--text-tertiary);
+}
+
+.archive__year-filters {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.archive__year-btn {
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.archive__year-btn--active {
+  background: var(--f1-red);
+  border-color: var(--f1-red);
+  color: white;
+}
+
+.archive__year-btn:hover:not(.archive__year-btn--active) {
+  border-color: var(--text-secondary);
+}
+
+.archive__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-lg);
+}
+
+.archive__card {
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.archive__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--f1-red), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.archive__card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(225, 6, 0, 0.1);
+}
+
+.archive__card:hover::before {
+  opacity: 1;
+}
+
+.archive__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.archive__card-round {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--f1-red);
+}
+
+.archive__card-country-flag {
+  width: 24px;
+  height: 18px;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.archive__card-year {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+.archive__card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.archive__card-circuit {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.archive__card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.archive__card-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.archive__card-stat-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+}
+
+.archive__card-stat-value {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.archive__card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-primary);
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+.archive__view-btn {
+  background: transparent;
+  border: 1px solid var(--f1-red);
+  color: var(--f1-red);
+  padding: 4px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-data);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.archive__view-btn:hover {
+  background: var(--f1-red);
+  color: white;
+}
+
+/* ── Race Detail Modal ── */
+.race-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 5, 12, 0.85);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  animation: modal-fadein 0.3s ease-out;
+}
+
+@keyframes modal-fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.race-modal {
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: modal-slidein 0.35s ease-out;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(225, 6, 0, 0.08);
+}
+
+@keyframes modal-slidein {
+  from { transform: translateY(30px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.race-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--border-primary);
+  background: linear-gradient(180deg, rgba(225, 6, 0, 0.06) 0%, transparent 100%);
+}
+
+.race-modal__header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.race-modal__country-flag {
+  width: 40px;
+  height: 30px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.race-modal__title {
+  font-family: var(--font-data);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.race-modal__meta {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.race-modal__close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.race-modal__close:hover {
+  background: rgba(225, 6, 0, 0.15);
+  border-color: var(--f1-red);
+  color: white;
+}
+
+/* Tabs */
+.race-modal__tabs {
+  display: flex;
+  gap: 2px;
+  padding: 0 var(--space-xl);
+  border-bottom: 1px solid var(--border-primary);
+  background: rgba(0, 0, 0, 0.2);
+  overflow-x: auto;
+}
+
+.race-modal__tab {
+  padding: var(--space-md) var(--space-lg);
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.race-modal__tab:hover {
+  color: var(--text-primary);
+}
+
+.race-modal__tab--active {
+  color: var(--f1-red);
+  border-bottom-color: var(--f1-red);
+}
+
+.race-modal__tab-icon {
+  font-size: 0.85rem;
+}
+
+/* Content */
+.race-modal__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-xl);
+}
+
+.race-modal__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+/* Overview Tab */
+.race-modal__section-title {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-md);
+}
+
+.race-modal__podium-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.race-modal__podium-card {
+  text-align: center;
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.race-modal__podium-card:hover {
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.race-modal__podium-card--p1 {
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.04);
+}
+
+.race-modal__podium-pos {
+  font-family: var(--font-data);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.race-modal__podium-card--p1 .race-modal__podium-pos { color: #FFD700; }
+.race-modal__podium-card--p2 .race-modal__podium-pos { color: #C0C0C0; }
+.race-modal__podium-card--p3 .race-modal__podium-pos { color: #CD7F32; }
+
+.race-modal__podium-bar {
+  height: 3px;
+  border-radius: 2px;
+  margin: var(--space-sm) auto;
+  width: 60%;
+}
+
+.race-modal__podium-name {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-top: var(--space-xs);
+}
+
+.race-modal__podium-team {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.race-modal__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.race-modal__stat-card {
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+}
+
+.race-modal__stat-label {
+  display: block;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+.race-modal__stat-value {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Key Moments */
+.race-modal__moments-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.race-modal__moment {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.race-modal__moment-marker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--f1-red);
+  flex-shrink: 0;
+  margin-top: 6px;
+  box-shadow: 0 0 8px rgba(225, 6, 0, 0.4);
+}
+
+.race-modal__moment-text {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Watch Sections (shared) */
+.race-modal__watch-section {
+  min-height: 280px;
+}
+
+/* Replay Tab */
+.race-modal__video-placeholder {
+  text-align: center;
+  padding: var(--space-2xl);
+  border: 1px dashed rgba(225, 6, 0, 0.3);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(225, 6, 0, 0.04) 0%, transparent 100%);
+  margin-bottom: var(--space-xl);
+}
+
+.race-modal__video-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(225, 6, 0, 0.15);
+  border: 2px solid var(--f1-red);
+  font-size: 1.5rem;
+  color: var(--f1-red);
+}
+
+.race-modal__video-placeholder h3 {
+  font-family: var(--font-data);
+  font-size: 1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.race-modal__video-placeholder p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.race-modal__video-meta {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+.race-modal__video-badge {
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.race-modal__play-btn {
+  padding: var(--space-sm) var(--space-xl) !important;
+  font-size: 0.8rem !important;
+}
+
+.race-modal__feed-selector h4 {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-md);
+}
+
+.race-modal__feeds {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.race-modal__feed {
+  padding: var(--space-md);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.race-modal__feed:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.race-modal__feed--active {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--accent-cyan);
+}
+
+/* Highlights Tab */
+.race-modal__highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.race-modal__highlight-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.race-modal__highlight-card:hover {
+  border-color: var(--f1-red);
+  background: rgba(225, 6, 0, 0.04);
+}
+
+.race-modal__highlight-thumb {
+  width: 80px;
+  height: 54px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(225, 6, 0, 0.15), rgba(0, 0, 0, 0.4));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.race-modal__highlight-play {
+  font-size: 1.2rem;
+  color: white;
+  opacity: 0.8;
+}
+
+.race-modal__highlight-duration {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  font-size: 0.55rem;
+  font-family: var(--font-data);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1px 4px;
+  border-radius: 2px;
+  color: white;
+}
+
+.race-modal__highlight-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.race-modal__highlight-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.race-modal__highlight-desc {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+/* Onboard Tab */
+.race-modal__onboard-title {
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-lg);
+}
+
+.race-modal__onboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.race-modal__onboard-card {
+  text-align: center;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.race-modal__onboard-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.race-modal__onboard-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid;
+  margin: 0 auto var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all var(--transition-fast);
+}
+
+.race-modal__onboard-card:hover .race-modal__onboard-avatar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.race-modal__onboard-play {
+  font-size: 1.4rem;
+  opacity: 0.7;
+}
+
+.race-modal__onboard-name {
+  display: block;
+  font-family: var(--font-data);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.race-modal__onboard-fullname {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.race-modal__onboard-team {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* Analysis Tab */
+.race-modal__analysis-panels {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.race-modal__analysis-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.race-modal__analysis-card--wide {
+  grid-column: 1 / -1;
+}
+
+.race-modal__analysis-card h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.race-modal__analysis-chart-placeholder {
+  height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.race-modal__analysis-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 100%;
+}
+
+.race-modal__analysis-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  min-width: 6px;
+  transition: height 0.5s ease;
+}
+
+.race-modal__spaghetti {
+  position: relative;
+  height: 100%;
+}
+
+.race-modal__spaghetti-line {
+  position: absolute;
+  height: 3px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.race-modal__spaghetti-line span {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  position: absolute;
+  right: -30px;
+}
+
+/* Sector Table */
+.race-modal__sector-table {
+  width: 100%;
+}
+
+.race-modal__sector-header,
+.race-modal__sector-row {
+  display: grid;
+  grid-template-columns: 60px repeat(4, 1fr);
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  font-size: 0.72rem;
+}
+
+.race-modal__sector-header {
+  color: var(--text-tertiary);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.race-modal__sector-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-family: var(--font-data);
+}

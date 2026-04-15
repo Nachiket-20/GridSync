@@ -1,0 +1,182 @@
+/* ── Profile Page ── */
+.profile {
+  min-height: calc(100vh - 52px);
+  padding: var(--space-2xl);
+}
+
+.profile__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile__header {
+  margin-bottom: var(--space-2xl);
+}
+
+.profile__title {
+  font-family: var(--font-data);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-xs);
+}
+
+.profile__subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.profile__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* User Card */
+.profile__user-card {
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.profile__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--f1-red), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-lg);
+}
+
+.profile__avatar-icon {
+  font-size: 2rem;
+}
+
+.profile__user-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.profile__user-email {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.profile__user-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  border-top: 1px solid var(--border-primary);
+  padding-top: var(--space-xl);
+}
+
+.profile__user-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile__user-stat-value {
+  font-family: var(--font-data);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.profile__user-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+/* Favorite Driver */
+.profile__favorite-current {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--bg-primary);
+  border: 1px solid;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+}
+
+.profile__favorite-number {
+  font-family: var(--font-data);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.profile__favorite-name {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.profile__favorite-team {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.profile__favorite-flag {
+  font-size: 1.5rem;
+  margin-left: auto;
+}
+
+.profile__driver-select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  outline: none;
+}
+
+/* Notifications */
+.profile__notif-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.profile__toggle-input {
+  appearance: none;
+  width: 40px;
+  height: 22px;
+  background: var(--bg-card);
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.profile__toggle-input::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  transition: all var(--transition-fast);
+}
+
+.profile__toggle-input:checked {
+  background: var(--accent-cyan);
+}
+
+.profile__toggle-input:checked::after {
+  left: 21px;
+  background: white;
+}
